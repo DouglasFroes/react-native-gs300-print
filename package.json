@@ -1,7 +1,7 @@
 {
   "name": "react-native-gs300-print",
   "version": "0.1.0",
-  "description": "pdv gs300",
+  "description": "pdv gs300 printed",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
