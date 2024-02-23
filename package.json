@@ -46,9 +46,9 @@
   "author": "douglasfroes <douglassantosfroes@gmail.com> (https://github.com/DouglasFroes)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DouglasFroes/react-native-gs300/issues"
+    "url": "https://github.com/DouglasFroes/react-native-gs300-print/issues"
   },
-  "homepage": "https://github.com/DouglasFroes/react-native-gs300#readme",
+  "homepage": "https://github.com/DouglasFroes/react-native-gs300-print#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
