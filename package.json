@@ -1,5 +1,5 @@
 {
-  "name": "react-native-gs300",
+  "name": "react-native-gs300-print",
   "version": "0.1.0",
   "description": "pdv gs300",
   "main": "lib/commonjs/index",
@@ -41,7 +41,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DouglasFroes/react-native-gs300.git"
+    "url": "git+https://github.com/DouglasFroes/react-native-gs300-print.git"
   },
   "author": "douglasfroes <douglassantosfroes@gmail.com> (https://github.com/DouglasFroes)",
   "license": "MIT",

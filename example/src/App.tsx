@@ -1,18 +1,50 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-gs300';
+import { StyleSheet, View, Button } from 'react-native';
+import { print } from 'react-native-gs300';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+  function printT() {
+    print(
+      [
+        {
+          text: 'Hello World',
+          size: 32,
+          align: 0,
+          bold: false,
+          line: 1,
+          width: 80,
+          height: 0,
+          type: 'text',
+        },
+        {
+          text: 'Douglas',
+          size: 32,
+          align: 0,
+          bold: false,
+          line: 1,
+          width: 80,
+          height: 0,
+          type: 'text',
+        },
+        {
+          text: 'teste',
+          size: 32,
+          align: 0,
+          bold: true,
+          line: 1,
+          width: 80,
+          height: 0,
+          type: 'text',
+        },
+      ],
+      { lineEnd: 2 }
+    );
+  }
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Button title="Print" onPress={printT} />
     </View>
   );
 }
