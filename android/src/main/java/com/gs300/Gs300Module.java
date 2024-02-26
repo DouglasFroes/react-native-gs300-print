@@ -75,7 +75,7 @@ public class Gs300Module extends ReactContextBaseJavaModule {
         this.printSpace(1);
         this.printCupom();
         this.printSpace(1);
-        // printHelper.printQRCode("https://www.gertec.com.br", 2, 1);
+        printHelper.printQRCode("https://www.gertec.com.br", 2, 1);
         this.printSpace(1);
         printHelper.printBarCode("7899970400070", 2, 100, 200, 1, 0);
         this.printSpace(7);
@@ -103,18 +103,20 @@ public class Gs300Module extends ReactContextBaseJavaModule {
         printHelper.printData(text, size, align, bold, line, width, height);
       }else if (type.equals("barcode")) {
         String text = (String) map.get("text");
-        int size = (int) (double) map.get("size");
-        int align = (int) (double) map.get("align");
-        int width = (int) (double) map.get("width");
+        int symbology = (int) (double) map.get("symbology");
         int height = (int) (double) map.get("height");
-        int line = (int) (double) map.get("line");
+        int width = (int) (double) map.get("width");
+        int align = (int) (double) map.get("align");
+        int textPosition = (int) (double) map.get("textPosition");
 
-        printHelper.printBarCode(text, size, align, width, height, line);
+        // String data, int symbology, int height, int width, int alignment, int textPosition
+        printHelper.printBarCode(text, symbology, height, width, align, textPosition);
       }else if (type.equals("qrcode")) {
         String text = (String) map.get("text");
         int size = (int) (double) map.get("size");
         int align = (int) (double) map.get("align");
 
+        //  String data, int size, int align
         printHelper.printQRCode(text, size, align);
       } else if (type.equals("space")) {
         int line = (int) (double) map.get("line");

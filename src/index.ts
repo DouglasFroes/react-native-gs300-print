@@ -34,11 +34,11 @@ type PrintData = {
 
 type PrintBarcode = {
   text: string;
-  size: number;
-  align: number;
-  width: number;
+  symbology: number;
   height: number;
-  line: number;
+  width: number;
+  align: number;
+  textPosition: number;
   type: 'barcode';
 };
 
