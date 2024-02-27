@@ -78,15 +78,10 @@ repositories {
 
 
 dependencies {
-  //
   implementation 'com.google.code.gson:gson:2.8.6'
-  implementation(fileTree(dir: 'libs', include: ['*.jar']))
-    // implementation project(path: ':TextToSpeaks')
-    // implementation project(path: ':MSitef')
-    // implementation project(path: ':satfuncoes')
-    // implementation project(path: ':satfuncoes')
-    // implementation project(path: ':satfuncoes')
-    // implementation project(path: ':satfuncoes')
+  implementation files('libs/GS300_APlibrary.jar')
+
+
   // For < 0.71, this will be from the local maven repo
   // For > 0.71, this will be replaced by `com.facebook.react:react-android:$version` by react gradle plugin
   //noinspection GradleDynamicVersion

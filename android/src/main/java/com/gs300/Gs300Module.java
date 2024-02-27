@@ -67,7 +67,7 @@ public class Gs300Module extends ReactContextBaseJavaModule {
         for (int i = 0; i < n; i++) {
             str_space.append("\n");
         }
-        printHelper.printData(str_space.toString(), 32, 0, false, 1, 80, 0);
+        printHelper.printData(str_space.toString(), 15, 0, false, 1, 80, 0);
   }
 
   @ReactMethod
