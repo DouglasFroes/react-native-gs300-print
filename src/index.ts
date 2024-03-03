@@ -22,28 +22,28 @@ export function printTest(): void {
 }
 
 type PrintData = {
-  text: string;
+  value: string;
   size: number;
-  align: number;
-  bold: boolean;
-  line: number;
-  width: number;
-  height: number;
+  textType: number;
+  isUnderLine: boolean;
+  alignment: 0 | 1 | 2;
+  lineSpace: number; //0;
+  paperWidth: number; //80 | 58;
   type: 'text';
 };
 
 type PrintBarcode = {
-  text: string;
+  value: string;
   symbology: number;
   height: number;
   width: number;
-  align: number;
+  alignment: number;
   textPosition: number;
   type: 'barcode';
 };
 
 type PrintQRCode = {
-  text: string;
+  value: string;
   size: number;
   align: number;
   type: 'qrcode';
@@ -76,7 +76,7 @@ type PrintConfig = {
   lineEnd?: number;
 };
 
-export function print(i: IPrint[], config: PrintConfig = {}): void {
+export function onPrint(i: IPrint[], config: PrintConfig = {}): void {
   if (i.length === 0) return;
 
   if (config.lineStart && typeof config.lineStart === 'number') {
@@ -92,5 +92,27 @@ export function print(i: IPrint[], config: PrintConfig = {}): void {
     }
   }
 
-  return Gs300.print(JSON.stringify(i));
+  console.log(i);
+
+  return Gs300.onPrint(JSON.stringify(i));
+}
+
+export function printImageBase64(
+  base64: string,
+  align: 0 | 1 | 2,
+  paperWidth: 58 | 80,
+  lineEnd: number,
+  isCut: boolean
+): void {
+  return Gs300.onPrintImageBase64(base64, align, paperWidth, lineEnd, isCut);
+}
+
+export function printImageFile(
+  file: string,
+  align: 0 | 1 | 2,
+  paperWidth: 58 | 80,
+  lineEnd: number,
+  isCut: boolean
+): void {
+  return Gs300.onPrintImageFile(file, align, paperWidth, lineEnd, isCut);
 }

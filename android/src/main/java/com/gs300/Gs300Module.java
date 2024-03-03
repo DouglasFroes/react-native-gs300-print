@@ -10,8 +10,14 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
+import com.facebook.react.bridge.Callback;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 
 import com.elotouch.AP80.sdkhelper.AP80PrintHelper;
+
 
 @ReactModule(name = Gs300Module.NAME)
 public class Gs300Module extends ReactContextBaseJavaModule {
@@ -84,7 +90,8 @@ public class Gs300Module extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void print(String mapString) {
+  public void onPrint(String mapString) {
+
     Gson gson = new Gson();
     Object[] objects = gson.fromJson(mapString, Object[].class);
 
@@ -92,32 +99,29 @@ public class Gs300Module extends ReactContextBaseJavaModule {
       Map<String, Object> map = (Map<String, Object>) entry;
       String type =  map.get("type").toString();
       if (type.equals("text")) {
-        String text = (String) map.get("text");
+        String value = (String) map.get("value");
         int size = (int) (double) map.get("size");
-        boolean bold = (boolean) map.get("bold");
-        int align = (int) (double) map.get("align");
-        int line = (int) (double) map.get("line");
-        int width = (int) (double) map.get("width");
-        int height = (int) (double) map.get("height");
+        int textType = (int) (double) map.get("textType");
+        boolean isUnderLine = (boolean) map.get("isUnderLine");
+        int alignment = (int) (double) map.get("alignment");
+        int paperWidth = (int) (double) map.get("paperWidth");
+        int lineSpace = (int) (double) map.get("lineSpace");
 
-        printHelper.printData(text, size, align, bold, line, width, height);
+        printHelper.printData(value, size, textType, isUnderLine, alignment, paperWidth, lineSpace);
       }else if (type.equals("barcode")) {
-        String text = (String) map.get("text");
+        String value = (String) map.get("value");
         int symbology = (int) (double) map.get("symbology");
         int height = (int) (double) map.get("height");
         int width = (int) (double) map.get("width");
-        int align = (int) (double) map.get("align");
+        int alignment = (int) (double) map.get("alignment");
         int textPosition = (int) (double) map.get("textPosition");
-
-        // String data, int symbology, int height, int width, int alignment, int textPosition
-        printHelper.printBarCode(text, symbology, height, width, align, textPosition);
+        printHelper.printBarCode(value, symbology, height, width, alignment, textPosition);
       }else if (type.equals("qrcode")) {
-        String text = (String) map.get("text");
+        String value = (String) map.get("value");
         int size = (int) (double) map.get("size");
         int align = (int) (double) map.get("align");
 
-        //  String data, int size, int align
-        printHelper.printQRCode(text, size, align);
+        printHelper.printQRCode(value, size, align);
       } else if (type.equals("space")) {
         int line = (int) (double) map.get("line");
 
@@ -128,6 +132,35 @@ public class Gs300Module extends ReactContextBaseJavaModule {
       }else if (type.equals("start")) {
         printHelper.printStart();
       }
+    }
+  }
+
+  @ReactMethod
+  public void onPrintImageBase64(String base64, int align, int paperWidth , int line, boolean isCut) {
+    final byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
+    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+    printHelper.printBitmap(decodedByte, align, paperWidth);
+
+    this.printSpace(line);
+
+    printHelper.printStart();
+    if(isCut){
+      printHelper.cutPaper(1);
+    }
+  }
+
+  @ReactMethod
+  public void onPrintImageFile(String filePath, int align, int paperWidth , int line, boolean isCut) {
+    Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+    printHelper.printBitmap(bitmap, align, paperWidth);
+
+    this.printSpace(line);
+
+    printHelper.printStart();
+
+    if(isCut){
+      printHelper.cutPaper(1);
     }
   }
 }
