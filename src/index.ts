@@ -92,8 +92,6 @@ export function onPrint(i: IPrint[], config: PrintConfig = {}): void {
     }
   }
 
-  console.log(i);
-
   return Gs300.onPrint(JSON.stringify(i));
 }
 
